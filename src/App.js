@@ -19,6 +19,14 @@ class AutocompleteSearch extends React.Component {
     });
   }
 
+  getSuggestions() {
+    return [
+        'first item',
+        'second item',
+        'third item',
+    ];
+  }
+
   render() {
     return (
       <div>
@@ -30,6 +38,7 @@ class AutocompleteSearch extends React.Component {
         />
         <SuggestionDropdown
           searchText={this.state.searchText}
+          suggestions={this.getSuggestions()}
         />
       </div>
     );
@@ -53,13 +62,24 @@ class SearchBox extends React.Component {
 }
 
 class SuggestionDropdown extends React.Component {
+  getSuggestionItems() {
+    const suggestions = this.props.suggestions;
+    const suggestionItems = suggestions.map((suggestion, i) => {
+      return <SuggestionItem
+        searchText={this.props.searchText}
+        suggestionText={suggestion}
+        key={i}
+      />;
+    });
+
+    return suggestionItems;
+  }
+
   render() {
     return (
       <div>
         <h2>SuggestionDropdown</h2>
-        <SuggestionItem searchText={this.props.searchText}/>
-        <SuggestionItem searchText={this.props.searchText}/>
-        <SuggestionItem searchText={this.props.searchText}/>
+        {this.getSuggestionItems()}
       </div>
     );
   }
@@ -67,14 +87,17 @@ class SuggestionDropdown extends React.Component {
 
 class SuggestionItem extends React.Component {
   render() {
+    const searchText = this.props.searchText;
+    const suggestionText = this.props.suggestionText;
+    const itemText = `${searchText} - ${suggestionText}`;
+
     return (
       <div>
-        <h3>SuggestionItem - {this.props.searchText}</h3>
+        <h3>{itemText}</h3>
       </div>
     );
   }
 }
-
 
 class App extends Component {
   render() {
