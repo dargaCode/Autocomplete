@@ -14,9 +14,16 @@ class AutocompleteSearch extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({
-      searchText: event.target.value,
-    });
+    if (event.target.type === 'text') {
+      this.setState({
+        searchText: event.target.value,
+      });
+    } else {
+      this.setState({
+        searchText: event.target.innerText,
+      });
+    }
+
   }
 
   getSuggestions() {
@@ -39,6 +46,7 @@ class AutocompleteSearch extends React.Component {
         <SuggestionDropdown
           searchText={this.state.searchText}
           suggestions={this.getSuggestions()}
+          onClick={this.handleChange}
         />
       </div>
     );
@@ -69,6 +77,7 @@ class SuggestionDropdown extends React.Component {
         searchText={this.props.searchText}
         suggestionText={suggestion}
         key={i}
+        onClick={this.props.onClick}
       />;
     });
 
@@ -92,7 +101,7 @@ class SuggestionItem extends React.Component {
     const itemText = `${searchText} - ${suggestionText}`;
 
     return (
-      <div>
+      <div onClick={this.props.onClick}>
         <h3>{itemText}</h3>
       </div>
     );
