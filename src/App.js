@@ -21,6 +21,13 @@ class AutocompleteSearch extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
+
+    this.activatePrevSuggestion = this
+      .activateAdjacentIndex
+      .bind(this, this.neighborEnum.prev);
+    this.activateNextSuggestion = this
+      .activateAdjacentIndex
+      .bind(this, this.neighborEnum.next);
   }
 
   handleChange(event) {
@@ -38,7 +45,18 @@ class AutocompleteSearch extends React.Component {
   }
 
   handleKeyPress(event) {
-    console.log(event.key);
+    // only navigate between suggestions if some exist
+    if (this.state.suggestions.length === 0) {
+      return;
+    }
+
+    if (event.key === 'ArrowUp') {
+      this.activatePrevSuggestion();
+      event.preventDefault();
+    } else if (event.key === 'ArrowDown') {
+      this.activateNextSuggestion();
+      event.preventDefault();
+    }
   }
 
   getSuggestions() {
@@ -57,7 +75,48 @@ class AutocompleteSearch extends React.Component {
 
     this.setState({
       suggestions: suggestions,
+      /*
+       * one extra slot at the end, which will be let users arrow
+       * back to a state of no active suggestion (which is also
+       * the default starting state)
+       */
       maxIndex: suggestions.length,
+      activeIndex: suggestions.length,
+    });
+  }
+
+  activateAdjacentIndex(neighbor) {
+    const activeIndex = this.state.activeIndex;
+    const maxIndex = this.state.maxIndex;
+    const prev = this.neighborEnum.prev;
+    const next = this.neighborEnum.next;
+
+    let newIndex;
+
+    switch(true) {
+      case neighbor === prev:
+        newIndex = activeIndex - 1;
+        break;
+      case neighbor === next:
+        newIndex = activeIndex + 1;
+        break;
+      default:
+        throw('invalid neighbor!');
+    }
+
+    // wrapping up and down
+    if (newIndex < 0) {
+      newIndex = maxIndex;
+    }
+
+    if (newIndex > maxIndex) {
+      newIndex = 0;
+    }
+
+    console.log(newIndex);
+
+    this.setState({
+      activeIndex: newIndex,
     });
   }
 
