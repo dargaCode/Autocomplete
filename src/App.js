@@ -7,10 +7,20 @@ class AutocompleteSearch extends React.Component {
     super(props);
 
     this.state = {
-      searchText: 'searchText',
+      searchText: '',
+      activeIndex: null,
+      suggestions: [],
+      maxIndex: null,
     }
 
+    this.neighborEnum = Object.freeze({
+      prev: 'prev',
+      next: 'next',
+    });
+
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.getSuggestions = this.getSuggestions.bind(this);
   }
 
   handleChange(event) {
@@ -24,14 +34,31 @@ class AutocompleteSearch extends React.Component {
       });
     }
 
+    this.getSuggestions();
+  }
+
+  handleKeyPress(event) {
+    console.log(event.key);
   }
 
   getSuggestions() {
-    return [
-        'first item',
-        'second item',
-        'third item',
+    const suggestions = [
+      'item0',
+      'item1',
+      'item2',
+      'item3',
+      'item4',
+      'item5',
+      'item6',
+      'item7',
+      'item8',
+      'item9',
     ];
+
+    this.setState({
+      suggestions: suggestions,
+      maxIndex: suggestions.length,
+    });
   }
 
   render() {
@@ -42,10 +69,11 @@ class AutocompleteSearch extends React.Component {
           placeholder={this.props.searchPlaceholder}
           searchText={this.state.searchText}
           onChange={this.handleChange}
+          handleKeyPress={this.handleKeyPress}
         />
         <SuggestionDropdown
           searchText={this.state.searchText}
-          suggestions={this.getSuggestions()}
+          suggestions={this.state.suggestions}
           onClick={this.handleChange}
         />
       </div>
@@ -63,6 +91,7 @@ class SearchBox extends React.Component {
           placeholder={this.props.placeholder}
           value={this.props.searchText}
           onChange={this.props.onChange}
+          onKeyDown={this.props.handleKeyPress}
         />
       </div>
     );
@@ -70,6 +99,12 @@ class SearchBox extends React.Component {
 }
 
 class SuggestionDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.getSuggestionItems = this.getSuggestionItems.bind(this);
+  }
+
   getSuggestionItems() {
     const suggestions = this.props.suggestions;
     const suggestionItems = suggestions.map((suggestion, i) => {
