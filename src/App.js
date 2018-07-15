@@ -133,6 +133,7 @@ class AutocompleteSearch extends React.Component {
         <SuggestionDropdown
           searchText={this.state.searchText}
           suggestions={this.state.suggestions}
+          activeIndex={this.state.activeIndex}
           onClick={this.handleChange}
         />
       </div>
@@ -166,13 +167,15 @@ class SuggestionDropdown extends React.Component {
 
   getSuggestionItems() {
     const suggestions = this.props.suggestions;
-    const suggestionItems = suggestions.map((suggestion, i) => {
-      return <SuggestionItem
-        searchText={this.props.searchText}
-        suggestionText={suggestion}
-        key={i}
-        onClick={this.props.onClick}
-      />;
+    const suggestionItems = suggestions
+      .map((suggestion, index) => {
+        return <SuggestionItem
+          key={index}
+          searchText={this.props.searchText}
+          suggestionText={suggestion}
+          active={this.props.activeIndex === index}
+          onClick={this.props.onClick}
+        />;
     });
 
     return suggestionItems;
@@ -189,13 +192,31 @@ class SuggestionDropdown extends React.Component {
 }
 
 class SuggestionItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.CSS_CLASSES = {
+      ACTIVE: 'suggestion-active',
+    };
+  }
+
+
   render() {
     const searchText = this.props.searchText;
     const suggestionText = this.props.suggestionText;
     const itemText = `${searchText} - ${suggestionText}`;
 
+    let className = '';
+
+    if (this.props.active) {
+      className += this.CSS_CLASSES.ACTIVE;
+    }
+
     return (
-      <div onClick={this.props.onClick}>
+      <div
+        className={className}
+        onClick={this.props.onClick}
+      >
         <h3>{itemText}</h3>
       </div>
     );
@@ -207,7 +228,7 @@ class App extends Component {
     return (
       <div className="App">
         <AutocompleteSearch
-          searchPlaceholder="Searching for financial products"
+          searchPlaceholder="Enter search text"
         />
       </div>
     );
