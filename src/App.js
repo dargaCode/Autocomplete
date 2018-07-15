@@ -31,17 +31,23 @@ class AutocompleteSearch extends React.Component {
   }
 
   handleChange(event) {
-    if (event.target.type === 'text') {
-      this.setState({
-        searchText: event.target.value,
-      });
-    } else {
-      this.setState({
-        searchText: event.target.innerText,
-      });
-    }
+    let searchText = event.target.type === 'text' ?
+      event.target.value :
+      event.target.innerText;
 
-    this.getSuggestions();
+    const suggestions = this.getSuggestions(searchText);
+
+    this.setState({
+      searchText: searchText,
+      suggestions: suggestions,
+      /*
+       * one extra slot at the end, which will be let users arrow
+       * back to a state of no active suggestion (which is also
+       * the default starting state)
+       */
+      maxIndex: suggestions.length,
+      activeIndex: suggestions.length,
+    });
   }
 
   handleKeyPress(event) {
@@ -59,7 +65,7 @@ class AutocompleteSearch extends React.Component {
     }
   }
 
-  getSuggestions() {
+  getSuggestions(searchText) {
     const suggestions = [
       'item0',
       'item1',
@@ -73,16 +79,7 @@ class AutocompleteSearch extends React.Component {
       'item9',
     ];
 
-    this.setState({
-      suggestions: suggestions,
-      /*
-       * one extra slot at the end, which will be let users arrow
-       * back to a state of no active suggestion (which is also
-       * the default starting state)
-       */
-      maxIndex: suggestions.length,
-      activeIndex: suggestions.length,
-    });
+    return searchText ? suggestions : [];
   }
 
   activateAdjacentIndex(neighbor) {
