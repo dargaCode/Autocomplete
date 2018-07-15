@@ -36,16 +36,11 @@ class AutocompleteSearch extends React.Component {
       event.target.value :
       this.state.searchText;
 
-    let searchTextOverride = event.target.type !== 'text' ?
-      event.target.innerText :
-      '';
-
-    const query = searchTextOverride || searchText;
-    const suggestions = this.getSuggestions(query);
+    const suggestions = this.getSuggestions(searchText);
 
     this.setState({
       searchText: searchText,
-      searchTextOverride: searchTextOverride,
+      searchTextOverride: '',
       suggestions: suggestions,
       /*
        * one extra slot at the end, which will be let users arrow
@@ -73,20 +68,26 @@ class AutocompleteSearch extends React.Component {
   }
 
   getSuggestions(searchText) {
-    const suggestions = [
-      'item0',
-      'item1',
-      'item2',
-      'item3',
-      'item4',
-      'item5',
-      'item6',
-      'item7',
-      'item8',
-      'item9',
-    ];
+    if (!searchText) {
+      return [];
+    }
 
-    return searchText ? suggestions : [];
+    const suggestions = [
+      'itemZero',
+      'itemOne',
+      'itemTwo',
+      'itemThree',
+      'itemFour',
+      'itemFive',
+      'itemSix',
+      'itemSeven',
+      'itemEight',
+      'itemNine',
+    ].map((suggestion) => {
+      return `${searchText} - ${suggestion}`;
+    });
+
+    return suggestions;
   }
 
   activateAdjacentIndex(neighbor) {
@@ -117,10 +118,9 @@ class AutocompleteSearch extends React.Component {
       newIndex = 0;
     }
 
-    console.log(newIndex);
-
     this.setState({
       activeIndex: newIndex,
+      searchTextOverride: this.state.suggestions[newIndex],
     });
   }
 
@@ -140,7 +140,6 @@ class AutocompleteSearch extends React.Component {
           searchTextOverride={this.state.searchTextOverride}
           suggestions={this.state.suggestions}
           activeIndex={this.state.activeIndex}
-          onClick={this.handleChange}
         />
       </div>
     );
@@ -181,7 +180,6 @@ class SuggestionDropdown extends React.Component {
           searchText={this.props.searchText}
           suggestionText={suggestion}
           active={this.props.activeIndex === index}
-          onClick={this.props.onClick}
         />;
     });
 
@@ -209,10 +207,6 @@ class SuggestionItem extends React.Component {
 
 
   render() {
-    const searchText = this.props.searchText;
-    const suggestionText = this.props.suggestionText;
-    const itemText = `${searchText} - ${suggestionText}`;
-
     let className = '';
 
     if (this.props.active) {
@@ -224,7 +218,7 @@ class SuggestionItem extends React.Component {
         className={className}
         onClick={this.props.onClick}
       >
-        <h3>{itemText}</h3>
+        <h3>{this.props.suggestionText}</h3>
       </div>
     );
   }
