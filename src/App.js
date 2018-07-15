@@ -8,6 +8,7 @@ class AutocompleteSearch extends React.Component {
 
     this.state = {
       searchText: '',
+      searchTextOverride: '',
       activeIndex: null,
       suggestions: [],
       maxIndex: null,
@@ -33,12 +34,18 @@ class AutocompleteSearch extends React.Component {
   handleChange(event) {
     let searchText = event.target.type === 'text' ?
       event.target.value :
-      event.target.innerText;
+      this.state.searchText;
 
-    const suggestions = this.getSuggestions(searchText);
+    let searchTextOverride = event.target.type !== 'text' ?
+      event.target.innerText :
+      '';
+
+    const query = searchTextOverride || searchText;
+    const suggestions = this.getSuggestions(query);
 
     this.setState({
       searchText: searchText,
+      searchTextOverride: searchTextOverride,
       suggestions: suggestions,
       /*
        * one extra slot at the end, which will be let users arrow
@@ -124,11 +131,13 @@ class AutocompleteSearch extends React.Component {
         <SearchBox
           placeholder={this.props.searchPlaceholder}
           searchText={this.state.searchText}
+          searchTextOverride={this.state.searchTextOverride}
           onChange={this.handleChange}
           handleKeyPress={this.handleKeyPress}
         />
         <SuggestionDropdown
           searchText={this.state.searchText}
+          searchTextOverride={this.state.searchTextOverride}
           suggestions={this.state.suggestions}
           activeIndex={this.state.activeIndex}
           onClick={this.handleChange}
@@ -146,7 +155,8 @@ class SearchBox extends React.Component {
         <input
           type="text"
           placeholder={this.props.placeholder}
-          value={this.props.searchText}
+          value={this.props.searchTextOverride ||
+            this.props.searchText}
           onChange={this.props.onChange}
           onKeyDown={this.props.handleKeyPress}
         />
