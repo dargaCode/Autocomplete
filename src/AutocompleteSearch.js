@@ -126,9 +126,10 @@ class AutocompleteSearch extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>AutocompleteSearch</h1>
+      <div className='search'>
         <SearchBox
+          disabled={this.props.disabled}
+          disabledText={'Loading...'}
           placeholder={this.props.searchPlaceholder}
           searchText={this.state.searchText}
           searchTextOverride={this.state.searchTextOverride}

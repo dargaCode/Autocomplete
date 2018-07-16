@@ -25,8 +25,7 @@ class SuggestionDropdown extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>SuggestionDropdown</h2>
+      <div className='suggestion-dropdown'>
         {this.getSuggestionItems()}
       </div>
     );

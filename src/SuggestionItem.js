@@ -1,19 +1,11 @@
 import React from 'react';
 
 class SuggestionItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.CSS_CLASSES = {
-      ACTIVE: 'suggestion-active',
-    };
-  }
-
   render() {
-    let className = '';
+    let className = 'suggestion-item ';
 
     if (this.props.active) {
-      className += this.CSS_CLASSES.ACTIVE;
+      className += 'suggestion-active';
     }
 
     return (
@@ -21,7 +13,10 @@ class SuggestionItem extends React.Component {
         className={className}
         onClick={this.props.onClick}
       >
-        <h3>{this.props.suggestionText}</h3>
+        <p className='display-name'>
+          {this.props.suggestionText}
+        </p>
+        <p className='type'>bank</p>
       </div>
     );
   }
