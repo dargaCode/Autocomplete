@@ -37,10 +37,19 @@ function Trie() {
     }
 
     if (!node.values) {
-      node.values = [];
+      node.values = [value];
     }
 
-    node.values.push(value);
+    /*
+     * Sets don't natively stringify to json, so
+     * using indexOf for now to prevent duplicates.
+     * This could cause performance problems in a real
+     * app, but a real app would also use a database
+     * instead of json to store the data.
+     */
+    if (node.values.indexOf(value) === -1) {
+      node.values.push(value);
+    }
   };
 
   this.containsKey = function(keyword) {
@@ -70,7 +79,7 @@ function Trie() {
 
   this.prefixSearch = function(prefix) {
     let node = _rootNode;
-    let results = [];
+    let results = new Set();
 
     for (let char of prefix) {
       char = char.toLowerCase();
@@ -90,7 +99,7 @@ function Trie() {
   function recursiveSearch(node, results) {
     for (const key in node) {
       if (key === 'values') {
-        results = results.concat(node.values);
+        results = results.add(...node.values);
       } else {
         const childNode = node[key];
         results = recursiveSearch(childNode, results);
