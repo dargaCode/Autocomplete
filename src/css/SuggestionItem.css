@@ -1,8 +1,6 @@
 .suggestion-item {
   text-align: left;
   margin-bottom: 0px;
-  box-shadow: 0 0 1px #aaa;
-  border-radius: 2px;
   cursor: pointer;
   /*to contain the floats below*/
   overflow: hidden;
@@ -13,7 +11,7 @@
 }
 
 .suggestion-item p {
-  padding: 7px 12px;
+  padding: 0 12px;
 }
 
 .suggestion-item p.display-name {

@@ -133,7 +133,7 @@ class AutocompleteSearch extends React.Component {
 
   render() {
     return (
-      <div className='search'>
+      <div className='autocomplete-search'>
         <SearchBox
           searchPlaceholder={this.props.searchPlaceholder}
           searchText={this.state.searchText}

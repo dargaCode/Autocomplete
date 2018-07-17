@@ -12,7 +12,7 @@ class App extends Component {
     dataTrie.importNodesFromJsonString(JSON.stringify(jsonData.trie));
 
     return (
-      <div className='App'>
+      <div className='app'>
         <header>
           <h1>Product Search</h1>
         </header>

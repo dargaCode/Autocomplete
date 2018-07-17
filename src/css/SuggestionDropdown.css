@@ -1,5 +1,10 @@
 .suggestion-dropdown {
+  width: 100%;
   font-size: 12px;
+  background: #fff;
+  border: 2px solid #ddd;
+  border-top: none;
+  position: absolute;
 }
 
 .suggestion-dropdown a {
