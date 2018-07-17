@@ -75,7 +75,8 @@ class AutocompleteSearch extends React.Component {
    * stripped keywords; stripped searches will find them properly.
    */
   stripSpecialChars(str) {
-    return str.replace(/[^\w\s]|_/g,'');
+    // removing special characters can result in sequential spaces
+    return str.replace(/[^\w\s]|_/g,'').replace(/\s+/g, ' ');
   }
 
   getSuggestions(searchText) {
