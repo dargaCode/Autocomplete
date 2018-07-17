@@ -6,14 +6,6 @@ import Trie from './Trie';
 import './css/App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      disabled: false,
-    }
-  }
-
   render() {
     const dataTrie = new Trie();
 
@@ -30,7 +22,6 @@ class App extends Component {
             searchPlaceholder='Enter search text'
             dataTrie={dataTrie}
             idDict={jsonData.dict}
-            disabled={this.state.disabled}
           />
         </div>
       </div>
