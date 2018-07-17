@@ -76,7 +76,7 @@ class AutocompleteSearch extends React.Component {
    */
   stripSpecialChars(str) {
     // removing special characters can result in sequential spaces
-    return str.replace(/[^\w\s]|_/g,'').replace(/\s+/g, ' ');
+    return str.replace(/[^\w\s]|_/g,'').replace(/\s+/g, ' ').trim();
   }
 
   getSuggestions(searchText) {
