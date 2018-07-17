@@ -99,7 +99,7 @@ class AutocompleteSearch extends React.Component {
         newIndex = activeIndex + 1;
         break;
       default:
-        throw('invalid neighbor!');
+        throw new Error('invalid neighbor!');
     }
 
     // wrapping up and down
