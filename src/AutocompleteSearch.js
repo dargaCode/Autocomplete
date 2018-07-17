@@ -22,12 +22,15 @@ class AutocompleteSearch extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
+    this.activateSuggestionIndex = this.activateSuggestionIndex
+      .bind(this);
 
+    // sharing same method functionality
     this.activatePrevSuggestion = this
-      .activateAdjacentIndex
+      .activateAdjacentSuggestion
       .bind(this, this.neighborEnum.prev);
     this.activateNextSuggestion = this
-      .activateAdjacentIndex
+      .activateAdjacentSuggestion
       .bind(this, this.neighborEnum.next);
   }
 
@@ -83,7 +86,7 @@ class AutocompleteSearch extends React.Component {
     return suggestions;
   }
 
-  activateAdjacentIndex(neighbor) {
+  activateAdjacentSuggestion(neighbor) {
     const activeIndex = this.state.activeIndex;
     const maxIndex = this.state.maxIndex;
     const prev = this.neighborEnum.prev;
@@ -103,6 +106,7 @@ class AutocompleteSearch extends React.Component {
     }
 
     // wrapping up and down
+    // (-1 is the default "no suggestions" index)
     if (newIndex < -1) {
       newIndex = maxIndex;
     }
@@ -111,13 +115,19 @@ class AutocompleteSearch extends React.Component {
       newIndex = 0;
     }
 
-    const activeSuggestion = this.state.suggestions[newIndex];
-    const overrideText = newIndex === -1 ?
+    this.activateSuggestionIndex(newIndex);
+  }
+
+  activateSuggestionIndex(index) {
+    const activeSuggestion = this.state.suggestions[index];
+
+    // -1 is the default "no suggestions" index
+    const overrideText = index === -1 ?
       '' :
       activeSuggestion.name;
 
     this.setState({
-      activeIndex: newIndex,
+      activeIndex: index,
       searchTextOverride: overrideText,
     });
   }
