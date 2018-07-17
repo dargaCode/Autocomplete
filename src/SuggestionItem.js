@@ -23,7 +23,7 @@ class SuggestionItem extends React.Component {
     return (
       <div
         className={className}
-        onMouseEnter={this.handleMouseEnter}
+        onMouseMove={this.handleMouseEnter}
       >
         <p className='display-name'>
           {this.props.suggestionText}
