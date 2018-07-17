@@ -22,7 +22,7 @@ class SearchBox extends React.Component {
           placeholder={placeholderText}
           value={this.props.searchTextOverride ||
             this.props.searchText}
-          onChange={this.props.onChange}
+          onChange={this.props.handleQueryChange}
           onKeyDown={this.props.handleKeyPress}
         />
       </div>

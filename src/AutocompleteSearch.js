@@ -19,7 +19,7 @@ class AutocompleteSearch extends React.Component {
       next: 'next',
     });
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleQueryChange = this.handleQueryChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
     this.activateSuggestionIndex = this.activateSuggestionIndex
@@ -36,11 +36,8 @@ class AutocompleteSearch extends React.Component {
       .bind(this, this.neighborEnum.next);
   }
 
-  handleChange(event) {
-    let searchText = event.target.type === 'text' ?
-      event.target.value :
-      this.state.searchText;
-
+  handleQueryChange(event) {
+    const searchText = event.target.value;
     const suggestions = this.getSuggestions(searchText);
 
     this.setState({
@@ -147,7 +144,7 @@ class AutocompleteSearch extends React.Component {
           placeholder={this.props.searchPlaceholder}
           searchText={this.state.searchText}
           searchTextOverride={this.state.searchTextOverride}
-          onChange={this.handleChange}
+          handleQueryChange={this.handleQueryChange}
           handleKeyPress={this.handleKeyPress}
         />
         <SuggestionDropdown
