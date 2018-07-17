@@ -42,13 +42,13 @@ class AutocompleteSearch extends React.Component {
       searchText: searchText,
       searchTextOverride: '',
       suggestions: suggestions,
+      maxIndex: suggestions.length - 1,
       /*
-       * one extra slot at the end, which will be let users arrow
-       * back to a state of no active suggestion (which is also
-       * the default starting state)
+       * one extra slot between the beginning and end, which
+       * takes user back to a state of no active suggestion
+       * (and is also the default state before navigating)
        */
-      maxIndex: suggestions.length,
-      activeIndex: suggestions.length,
+      activeIndex: -1,
     });
   }
 
@@ -103,7 +103,7 @@ class AutocompleteSearch extends React.Component {
     }
 
     // wrapping up and down
-    if (newIndex < 0) {
+    if (newIndex < -1) {
       newIndex = maxIndex;
     }
 
@@ -112,7 +112,9 @@ class AutocompleteSearch extends React.Component {
     }
 
     const activeSuggestion = this.state.suggestions[newIndex];
-    const overrideText = activeSuggestion.name;
+    const overrideText = newIndex === -1 ?
+      '' :
+      activeSuggestion.name;
 
     this.setState({
       activeIndex: newIndex,
