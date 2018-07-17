@@ -9,7 +9,7 @@ class SearchBox extends React.Component {
         <input
           type='text'
           spellCheck='false'
-          className='search-input'
+          className='search-box'
           placeholder={this.props.searchPlaceholder}
           value={this.props.searchTextOverride ||
             this.props.searchText}
