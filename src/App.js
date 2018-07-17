@@ -22,6 +22,7 @@ class App extends Component {
             searchPlaceholder='Enter search text'
             dataTrie={dataTrie}
             idDict={jsonData.dict}
+            maxSuggestions='10'
           />
         </div>
       </div>

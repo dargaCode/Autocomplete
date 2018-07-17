@@ -84,15 +84,18 @@ class AutocompleteSearch extends React.Component {
       return [];
     }
 
+    const maxSuggestions = this.props.maxSuggestions;
     const ids = this.props.dataTrie.prefixSearch(searchText);
 
-    const suggestions = ids.map((id) => {
+    let suggestions = ids.map((id) => {
       return this.props.idDict[id];
     })
 
-    console.log(suggestions);
+    suggestions = suggestions.sort((prev, curr) => {
+      return prev.type.localeCompare(curr.type);
+    });
 
-    return suggestions;
+    return suggestions.splice(0, maxSuggestions);
   }
 
   activateAdjacentSuggestion(neighbor) {
