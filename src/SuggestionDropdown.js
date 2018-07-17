@@ -6,6 +6,11 @@ class SuggestionDropdown extends React.Component {
     super(props);
 
     this.getSuggestionItems = this.getSuggestionItems.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+  }
+
+  handleMouseLeave() {
+    this.props.activateSuggestionIndex(-1);
   }
 
   getSuggestionItems() {
@@ -28,7 +33,10 @@ class SuggestionDropdown extends React.Component {
 
   render() {
     return (
-      <div className='suggestion-dropdown'>
+      <div
+        className='suggestion-dropdown'
+        onMouseLeave={this.handleMouseLeave}
+      >
         {this.getSuggestionItems()}
       </div>
     );

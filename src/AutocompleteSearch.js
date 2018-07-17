@@ -140,6 +140,7 @@ class AutocompleteSearch extends React.Component {
           searchTextOverride={this.state.searchTextOverride}
           handleQueryChange={this.handleQueryChange}
           handleKeyPress={this.handleKeyPress}
+          activateSuggestionIndex={this.activateSuggestionIndex}
         />
         <SuggestionDropdown
           searchText={this.state.searchText}
