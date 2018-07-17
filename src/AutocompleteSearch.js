@@ -38,7 +38,8 @@ class AutocompleteSearch extends React.Component {
 
   handleQueryChange(event) {
     const searchText = event.target.value;
-    const suggestions = this.getSuggestions(searchText);
+    const strippedSearchText = this.stripSpecialChars(searchText);
+    const suggestions = this.getSuggestions(strippedSearchText);
 
     this.setState({
       searchText: searchText,
@@ -67,6 +68,14 @@ class AutocompleteSearch extends React.Component {
       this.activateNextSuggestion();
       event.preventDefault();
     }
+  }
+
+  /*
+   * Ignore perentheses, dashes, etc. products are also stored by
+   * stripped keywords; stripped searches will find them properly.
+   */
+  stripSpecialChars(str) {
+    return str.replace(/[^\w\s]|_/g,'');
   }
 
   getSuggestions(searchText) {
