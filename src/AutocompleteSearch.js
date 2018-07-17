@@ -2,6 +2,8 @@ import React from 'react';
 import SuggestionDropdown from './SuggestionDropdown';
 import SearchBox from './SearchBox';
 
+import './css/AutocompleteSearch.css';
+
 class AutocompleteSearch extends React.Component {
   constructor(props) {
     super(props);

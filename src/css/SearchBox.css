@@ -1,0 +1,11 @@
+input {
+  font-family: helvetica;
+  font-size: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 16px 12px;
+}
+
+input:focus {
+  outline: none;
+}

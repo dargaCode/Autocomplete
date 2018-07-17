@@ -1,6 +1,8 @@
 import React from 'react';
 import SuggestionItem from './SuggestionItem';
 
+import './css/SuggestionDropdown.css';
+
 class SuggestionDropdown extends React.Component {
   constructor(props) {
     super(props);

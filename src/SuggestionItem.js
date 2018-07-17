@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './css/SuggestionItem.css';
+
 class SuggestionItem extends React.Component {
   constructor(props) {
     super(props);
