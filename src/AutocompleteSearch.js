@@ -24,8 +24,6 @@ class AutocompleteSearch extends React.Component {
     this.getSuggestions = this.getSuggestions.bind(this);
     this.activateSuggestionIndex = this.activateSuggestionIndex
       .bind(this);
-    this.handleSuggestionMouseEnter = this.handleSuggestionMouseEnter
-      .bind(this);
 
     // sharing same method functionality
     this.activatePrevSuggestion = this
@@ -67,10 +65,6 @@ class AutocompleteSearch extends React.Component {
       this.activateNextSuggestion();
       event.preventDefault();
     }
-  }
-
-  handleSuggestionMouseEnter(index) {
-    this.activateSuggestionIndex(index);
   }
 
   getSuggestions(searchText) {
@@ -152,8 +146,7 @@ class AutocompleteSearch extends React.Component {
           searchTextOverride={this.state.searchTextOverride}
           suggestions={this.state.suggestions}
           activeIndex={this.state.activeIndex}
-          handleSuggestionMouseEnter={this
-            .handleSuggestionMouseEnter}
+          activateSuggestionIndex={this.activateSuggestionIndex}
         />
       </div>
     );

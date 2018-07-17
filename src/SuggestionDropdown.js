@@ -19,8 +19,7 @@ class SuggestionDropdown extends React.Component {
           suggestionText={suggestion.name}
           typeText={suggestion.type}
           active={this.props.activeIndex === index}
-          handleSuggestionMouseEnter={this.props.
-            handleSuggestionMouseEnter}
+          activateSuggestionIndex={this.props.activateSuggestionIndex}
         />;
     });
 
