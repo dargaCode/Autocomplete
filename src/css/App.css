@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.suggestion-active {
-  color: red;
-}
-
 /*GENERAL*/
 
 * {
@@ -86,9 +82,10 @@ header {
   overflow: hidden;
 }
 
-.suggestion-item:hover {
+.suggestion-active {
   background-color: #d8d8d8;
 }
+
 
 .suggestion-item p {
   padding: 7px 12px;

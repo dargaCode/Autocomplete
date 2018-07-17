@@ -14,10 +14,13 @@ class SuggestionDropdown extends React.Component {
       .map((suggestion, index) => {
         return <SuggestionItem
           key={index}
+          index={index}
           searchText={this.props.searchText}
           suggestionText={suggestion.name}
           typeText={suggestion.type}
           active={this.props.activeIndex === index}
+          handleSuggestionMouseEnter={this.props.
+            handleSuggestionMouseEnter}
         />;
     });
 

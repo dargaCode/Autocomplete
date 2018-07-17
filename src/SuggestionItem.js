@@ -1,6 +1,16 @@
 import React from 'react';
 
 class SuggestionItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+  }
+
+  handleMouseEnter() {
+    this.props.handleSuggestionMouseEnter(this.props.index);
+  }
+
   render() {
     let className = 'suggestion-item ';
 
@@ -11,7 +21,7 @@ class SuggestionItem extends React.Component {
     return (
       <div
         className={className}
-        onClick={this.props.onClick}
+        onMouseEnter={this.handleMouseEnter}
       >
         <p className='display-name'>
           {this.props.suggestionText}
