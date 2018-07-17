@@ -15,7 +15,8 @@ class SuggestionDropdown extends React.Component {
         return <SuggestionItem
           key={index}
           searchText={this.props.searchText}
-          suggestionText={suggestion}
+          suggestionText={suggestion.name}
+          typeText={suggestion.type}
           active={this.props.activeIndex === index}
         />;
     });

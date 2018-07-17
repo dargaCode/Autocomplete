@@ -16,7 +16,7 @@ class SuggestionItem extends React.Component {
         <p className='display-name'>
           {this.props.suggestionText}
         </p>
-        <p className='type'>bank</p>
+        <p className='type'>{this.props.typeText}</p>
       </div>
     );
   }

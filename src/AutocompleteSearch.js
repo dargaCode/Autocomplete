@@ -75,7 +75,7 @@ class AutocompleteSearch extends React.Component {
     const ids = this.props.dataTrie.prefixSearch(searchText);
 
     const suggestions = ids.map((id) => {
-      return this.props.idDict[id].name;
+      return this.props.idDict[id];
     })
 
     console.log(suggestions);
@@ -111,9 +111,12 @@ class AutocompleteSearch extends React.Component {
       newIndex = 0;
     }
 
+    const activeSuggestion = this.state.suggestions[newIndex];
+    const overrideText = activeSuggestion.name;
+
     this.setState({
       activeIndex: newIndex,
-      searchTextOverride: this.state.suggestions[newIndex],
+      searchTextOverride: overrideText,
     });
   }
 
