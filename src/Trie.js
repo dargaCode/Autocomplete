@@ -79,7 +79,7 @@ function Trie() {
 
   this.prefixSearch = function(prefix) {
     let node = _rootNode;
-    let results = new Set();
+    let resultSet = new Set();
 
     for (let char of prefix) {
       char = char.toLowerCase();
@@ -88,25 +88,27 @@ function Trie() {
         node = node[char];
       } else {
         // prefix string not found at all
-        return results;
+        return [];
       }
     }
 
     // append all words which include the prefix
-    return recursiveSearch(node, results);
+    resultSet = recursiveSearch(node, resultSet);
+
+    return Array.from(resultSet);
   };
 
-  function recursiveSearch(node, results) {
+  function recursiveSearch(node, resultSet) {
     for (const key in node) {
       if (key === 'values') {
-        results = results.add(...node.values);
+        resultSet = resultSet.add(...node.values);
       } else {
         const childNode = node[key];
-        results = recursiveSearch(childNode, results);
+        resultSet = recursiveSearch(childNode, resultSet);
       }
     }
 
-    return results;
+    return resultSet;
   }
 
   this.getJsonString = function() {

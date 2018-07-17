@@ -72,20 +72,13 @@ class AutocompleteSearch extends React.Component {
       return [];
     }
 
-    const suggestions = [
-      'itemZero',
-      'itemOne',
-      'itemTwo',
-      'itemThree',
-      'itemFour',
-      'itemFive',
-      'itemSix',
-      'itemSeven',
-      'itemEight',
-      'itemNine',
-    ].map((suggestion) => {
-      return `${searchText} - ${suggestion}`;
-    });
+    const ids = this.props.dataTrie.prefixSearch(searchText);
+
+    const suggestions = ids.map((id) => {
+      return this.props.idDict[id].name;
+    })
+
+    console.log(suggestions);
 
     return suggestions;
   }
