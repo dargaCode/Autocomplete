@@ -6,10 +6,10 @@ class SuggestionItem extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
   }
 
-  handleMouseEnter() {
+  handleMouseMove() {
     this.props.setActiveSuggestion(this.props.index);
   }
 
@@ -23,7 +23,7 @@ class SuggestionItem extends React.Component {
     return (
       <div
         className={className}
-        onMouseMove={this.handleMouseEnter}
+        onMouseMove={this.handleMouseMove}
       >
         <p className='display-name'>
           {this.props.suggestionText}
