@@ -12,7 +12,7 @@ class SuggestionDropdown extends React.Component {
   }
 
   handleMouseLeave() {
-    this.props.activateSuggestionIndex(-1);
+    this.props.setActiveSuggestion(-1);
   }
 
   getSuggestionItems() {
@@ -26,7 +26,7 @@ class SuggestionDropdown extends React.Component {
           suggestionText={suggestion.name}
           typeText={suggestion.type}
           active={this.props.activeIndex === index}
-          activateSuggestionIndex={this.props.activateSuggestionIndex}
+          setActiveSuggestion={this.props.setActiveSuggestion}
         />;
     });
 

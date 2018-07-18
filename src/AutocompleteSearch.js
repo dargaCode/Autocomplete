@@ -24,7 +24,7 @@ class AutocompleteSearch extends React.Component {
     this.handleQueryChange = this.handleQueryChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
-    this.activateSuggestionIndex = this.activateSuggestionIndex
+    this.setActiveSuggestion = this.setActiveSuggestion
       .bind(this);
 
     // sharing same method functionality
@@ -127,10 +127,10 @@ class AutocompleteSearch extends React.Component {
       newIndex = 0;
     }
 
-    this.activateSuggestionIndex(newIndex);
+    this.setActiveSuggestion(newIndex);
   }
 
-  activateSuggestionIndex(index) {
+  setActiveSuggestion(index) {
     const activeSuggestion = this.state.suggestions[index];
 
     // -1 is the default "no suggestions" index
@@ -153,14 +153,13 @@ class AutocompleteSearch extends React.Component {
           searchTextOverride={this.state.searchTextOverride}
           handleQueryChange={this.handleQueryChange}
           handleKeyPress={this.handleKeyPress}
-          activateSuggestionIndex={this.activateSuggestionIndex}
         />
         <SuggestionDropdown
           searchText={this.state.searchText}
           searchTextOverride={this.state.searchTextOverride}
           suggestions={this.state.suggestions}
           activeIndex={this.state.activeIndex}
-          activateSuggestionIndex={this.activateSuggestionIndex}
+          setActiveSuggestion={this.setActiveSuggestion}
         />
       </div>
     );

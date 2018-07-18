@@ -10,7 +10,7 @@ class SuggestionItem extends React.Component {
   }
 
   handleMouseEnter() {
-    this.props.activateSuggestionIndex(this.props.index);
+    this.props.setActiveSuggestion(this.props.index);
   }
 
   render() {
