@@ -24,6 +24,7 @@ class SuggestionItem extends React.Component {
       <div
         className={className}
         onMouseMove={this.handleMouseMove}
+        onClick={this.props.redirectToActiveUrl}
       >
         <p className='display-name'>
           {this.props.suggestionText}

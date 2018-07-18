@@ -11,9 +11,10 @@ class AutocompleteSearch extends React.Component {
     this.state = {
       searchText: '',
       searchTextOverride: '',
-      activeIndex: null,
       suggestions: [],
       maxIndex: null,
+      activeIndex: null,
+      activeUrl: null,
     }
 
     this.neighborEnum = Object.freeze({
@@ -24,8 +25,8 @@ class AutocompleteSearch extends React.Component {
     this.handleQueryChange = this.handleQueryChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
-    this.setActiveSuggestion = this.setActiveSuggestion
-      .bind(this);
+    this.setActiveSuggestion = this.setActiveSuggestion.bind(this);
+    this.redirectToActiveUrl = this.redirectToActiveUrl.bind(this);
 
     // sharing same method functionality
     this.activatePrevSuggestion = this
@@ -67,6 +68,8 @@ class AutocompleteSearch extends React.Component {
     } else if (event.key === 'ArrowDown') {
       this.activateNextSuggestion();
       event.preventDefault();
+    } else if (event.key === 'Enter') {
+      this.redirectToActiveUrl();
     }
   }
 
@@ -133,15 +136,26 @@ class AutocompleteSearch extends React.Component {
   setActiveSuggestion(index) {
     const activeSuggestion = this.state.suggestions[index];
 
+    let overrideText = '';
+    let activeUrl = null;
+
     // -1 is the default "no suggestions" index
-    const overrideText = index === -1 ?
-      '' :
-      activeSuggestion.name;
+    if (index > -1) {
+      overrideText = activeSuggestion.name;
+      activeUrl = activeSuggestion.url;
+    }
 
     this.setState({
       activeIndex: index,
       searchTextOverride: overrideText,
+      activeUrl: activeUrl,
     });
+  }
+
+  redirectToActiveUrl() {
+    if (this.state.activeUrl) {
+      window.location = this.state.activeUrl;
+    }
   }
 
   render() {
@@ -160,6 +174,7 @@ class AutocompleteSearch extends React.Component {
           suggestions={this.state.suggestions}
           activeIndex={this.state.activeIndex}
           setActiveSuggestion={this.setActiveSuggestion}
+          redirectToActiveUrl={this.redirectToActiveUrl}
         />
       </div>
     );

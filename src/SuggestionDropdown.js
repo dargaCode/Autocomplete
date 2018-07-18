@@ -27,6 +27,7 @@ class SuggestionDropdown extends React.Component {
           typeText={suggestion.type}
           active={this.props.activeIndex === index}
           setActiveSuggestion={this.props.setActiveSuggestion}
+          redirectToActiveUrl={this.props.redirectToActiveUrl}
         />;
     });
 
