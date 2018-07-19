@@ -1,4 +1,13 @@
 .autocomplete-search {
-  border: 1px solid #bbb;
   position: relative;
+  transition: box-shadow .2s;
+}
+
+.autocomplete-search:focus {
+  outline: none;
+}
+
+.autocomplete-search:focus-within,
+.autocomplete-search:hover {
+  box-shadow: 1px 1px 4px #aaa;
 }

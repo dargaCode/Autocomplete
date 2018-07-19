@@ -6,7 +6,7 @@ header {
 .container {
   max-width: 500px;
   margin: 0 auto;
-  padding: 26px 28px;
+  padding: 30px 28px 34px;
   text-align: center;
   background: #fff;
   box-shadow: 0 0 4px #ddd;
@@ -22,5 +22,5 @@ h1 {
 h2 {
   font-size: 18.5px;
   font-weight: normal;
-  margin:  0 0 20px;
+  margin:  0 0 22px;
 }

@@ -2,11 +2,13 @@
   width: 100%;
   font-size: 12px;
   background: #fff;
-  border: 2px solid #ddd;
+  border: 1px solid #999;
   border-top: none;
   position: absolute;
+  display: none;
 }
 
-.suggestion-dropdown a {
-  color: black;
+.autocomplete-search:focus-within .suggestion-dropdown {
+  display: block;
+  box-shadow: 1px 1px 4px #aaa;
 }
