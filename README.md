@@ -3,7 +3,7 @@
 
 I tried once before to port my <a href="https://github.com/dargaCode/PhonebookSearch">Phonebook Search project</a> from vanilla JS over to React, and I wasn’t able to get it working.
 
-The approach I took back then was to take my finished fished project and start trying to stuff React code into it. This time I tackled it from scratch, building the UI components from the bottom up, and it worked out much better.
+The approach I took back then was to take my finished fished project and start trying to stuff React code into it. This time I tackled it from scratch, building the UI components from the bottom up, and it turned out much better.
 
 As I was building all of the UI elements, I ended up discovering a lot more edgecases, functionality, and polish that I wanted to add, which was very satisfying. 
 
