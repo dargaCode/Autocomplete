@@ -23,6 +23,7 @@ class App extends Component {
             dataTrie={dataTrie}
             idDict={jsonData.dict}
             maxSuggestions='10'
+            autoFocusSearchInput={true}
           />
         </div>
       </div>

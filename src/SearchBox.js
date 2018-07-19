@@ -15,6 +15,7 @@ class SearchBox extends React.Component {
             this.props.searchText}
           onChange={this.props.handleQueryChange}
           onKeyDown={this.props.handleKeyPress}
+          autoFocus={this.props.autoFocusSearchInput}
         />
       </div>
     );
