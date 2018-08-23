@@ -23,8 +23,8 @@ class SuggestionDropdown extends React.Component {
           key={index}
           index={index}
           searchText={this.props.searchText}
-          suggestionText={suggestion.name}
-          typeText={suggestion.type}
+          suggestionText={suggestion.key}
+          category={suggestion.category.toLowerCase()}
           active={this.props.activeIndex === index}
           setActiveSuggestion={this.props.setActiveSuggestion}
           redirectToActiveUrl={this.props.redirectToActiveUrl}

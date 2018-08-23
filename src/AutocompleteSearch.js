@@ -95,8 +95,15 @@ class AutocompleteSearch extends React.Component {
     })
 
     suggestions = suggestions.sort((prev, curr) => {
-      return prev.type.localeCompare(curr.type);
+      return prev.key.localeCompare(curr.key);
     });
+
+    // category sort overrides key sort, if categories are present
+    if (suggestions.length && suggestions[0].category) {
+      suggestions = suggestions.sort((prev, curr) => {
+        return prev.category.localeCompare(curr.category);
+      });
+    }
 
     return suggestions.splice(0, maxSuggestions);
   }

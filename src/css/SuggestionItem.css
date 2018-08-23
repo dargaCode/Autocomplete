@@ -18,7 +18,7 @@
   float: left;
 }
 
-.suggestion-item p.type {
+.suggestion-item p.category {
   float: right;
   text-align: right;
   font-weight: bold;
