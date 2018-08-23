@@ -26,7 +26,7 @@ class SuggestionItem extends React.Component {
         onMouseMove={this.handleMouseMove}
         onClick={this.props.redirectToActiveUrl}
       >
-        <p className='display-name'>
+        <p className='suggestion-key'>
           {this.props.suggestionText}
         </p>
         <p className='category'>{this.props.category}</p>

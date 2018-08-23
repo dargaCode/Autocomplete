@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AutocompleteSearch from './AutocompleteSearch';
-import jsonData from './data/processed-product-data.json';
+import jsonData from './data/searchable-data.json';
 import Trie from './Trie';
 
 import './css/App.css';
@@ -14,10 +14,10 @@ class App extends Component {
     return (
       <div className='app'>
         <header>
-          <h1>Product Search</h1>
+          <h1>US Location Search</h1>
         </header>
         <div className='container'>
-          <h2>Search for a financial product</h2>
+          <h2>Search for any US city or ZIP code</h2>
           <AutocompleteSearch
             searchPlaceholder='Enter search text'
             dataTrie={dataTrie}
