@@ -101,7 +101,9 @@ function Trie() {
   function recursiveSearch(node, resultSet) {
     for (const key in node) {
       if (key === 'values') {
-        resultSet = resultSet.add(...node.values);
+        for (const value of node.values) {
+          resultSet.add(value);
+        }
       } else {
         const childNode = node[key];
         resultSet = recursiveSearch(childNode, resultSet);
